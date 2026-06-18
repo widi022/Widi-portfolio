@@ -10,6 +10,7 @@
   --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
+  --font-charm: var(--font-charm);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -49,8 +50,8 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --background: oklch(14.479% 0.00002 271.152);
+  --foreground: oklch(90.853% 0.01093 16.839);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -126,5 +127,90 @@
   }
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
+  }
+  section[id] {
+    scroll-margin-top: 6rem;
+  }
+}
+
+@layer components {
+  .scrollbar-hidden {
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+
+  .marquee-track {
+    animation: marquee-left 24s linear infinite;
+    will-change: transform;
+  }
+
+  .section-background-hero {
+    background:
+      linear-gradient(to right, rgb(32 164 184 / 0.12) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(32 164 184 / 0.12) 1px, transparent 1px),
+      radial-gradient(circle at 10% 42%, rgb(0 105 116 / 0.72), transparent 38%),
+      #000;
+    background-size: 48px 48px, 48px 48px, auto, auto;
+  }
+
+  .section-background-hero::after {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(to right, transparent 18%, #000 62%);
+    content: "";
+    pointer-events: none;
+  }
+
+  .section-background-glow {
+    background:
+      radial-gradient(circle at 0 45%, rgb(0 105 116 / 0.42), transparent 24%),
+      radial-gradient(circle at 100% 65%, rgb(0 105 116 / 0.22), transparent 20%),
+      #000;
+  }
+
+  .section-background-bars {
+    background:
+      repeating-linear-gradient(
+        to right,
+        rgb(32 164 184 / 0.2) 0,
+        rgb(32 164 184 / 0.04) 1px,
+        transparent 1px,
+        transparent 42px
+      ),
+      linear-gradient(to top, rgb(0 105 116 / 0.62), transparent 75%),
+      #000;
+  }
+
+  @media (max-width: 767px) {
+    .section-background-hero::after {
+      background: linear-gradient(to bottom, transparent 18%, #000 58%);
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .section-background-hero::after {
+      background: linear-gradient(to right, transparent 8%, #000 78%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation-play-state: paused;
+    }
+  }
+}
+
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
   }
 }
