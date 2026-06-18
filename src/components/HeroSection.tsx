@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Mail, Send } from "lucide-react";
-import { FormEvent, useState } from "react";
+import { useState, type FormEvent } from "react";
 
 import { Button } from "@/components/ui/button";
 import MessageStatus from "@/components/MessageStatus";
@@ -29,7 +29,7 @@ export default function HeroSection() {
     event.preventDefault();
 
     try {
-      // Replace this with the email/API request when the contact backend is ready.
+      // tidak ada API
       await Promise.resolve();
       setSubmitStatus("success");
     } catch {
